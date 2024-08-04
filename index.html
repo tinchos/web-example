@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App</title>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .technology {
+            color: blue;
+            font-weight: bold;
+        }
+        .image-text {
+            font-weight: bold;
+        }
+        .tag {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <img src="logo.png" alt="Logo">
+        <p>Docker container</p>
+        <p class="technology">{{LANG}}</p>
+        <p><span class="image-text">Image:</span> <span class="tag">{{TAG}}</span></p>
+    </div>
+</body>
+</html>
