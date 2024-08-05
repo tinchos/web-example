@@ -51,7 +51,7 @@ jobs:
 #          no-cache: true
           tags: |
             mjcheveste/web-example:latest
-            mjcheveste/app-loggenerator:1.0.${{github.run_number}}
+            mjcheveste/web-example:1.0.${{github.run_number}}
 
       - name: 🚨 Trivy scanning 🚨
         uses: aquasecurity/trivy-action@0.20.0
