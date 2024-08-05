@@ -48,7 +48,9 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-#          no-cache: true
+          build-args: |
+            LANG=nginx
+            TAG=1.0.${{ github.run_number }}
           tags: |
             mjcheveste/web-example:latest
             mjcheveste/web-example:1.0.${{github.run_number}}
