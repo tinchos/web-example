@@ -1,14 +1,24 @@
+name: "Build Pipeline"
 run-name: Build ${{github.run_number}} by ${{github.actor}}
 # name: Construir y publicar imagen Docker
 
+#on:
+#  push:
+#    branches: [ main ]
+
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+      - develop
 
 jobs:
 
   GitHub-Contexts:
-    name: Get GitHub context 📑
+    name: 📑 Get GitHub context
     runs-on: ubuntu-latest
     steps:    
       - name: Dump GitHub context 
@@ -20,19 +30,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: ✅ Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configurar Docker Hub
+      - name: 🔧 Configurar Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASS }}
 
-      - name: Verify Docker Login
+      - name: 📝 Verify Docker Login
         run: docker info
 
-      - name: Construir imagen Docker
+      - name: 📦 Build Docker imagen 📦
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -43,7 +53,7 @@ jobs:
             mjcheveste/web-example:latest
             mjcheveste/app-loggenerator:1.0.${{github.run_number}}
 
-      - name: Escanear imagen con Trivy
+      - name: 🚨 Trivy scanning 🚨
         uses: aquasecurity/trivy-action@0.20.0
         with:
           image-ref: mjcheveste/web-example:latest
